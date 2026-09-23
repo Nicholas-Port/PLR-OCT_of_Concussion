@@ -33,7 +33,6 @@ function d = computeCohen_d(x1, x2, varargin)
 if nargin < 3, testType = 'independent'; 
 else           testType = varargin{1}; 
 end
-
 % basic quantities:
 n1       = numel(x1);
 n2       = numel(x2);
@@ -42,11 +41,9 @@ mean_x2  = nanmean(x2);
 var_x1   = nanvar(x1);
 var_x2   = nanvar(x2);
 meanDiff = (mean_x1 - mean_x2);
-
 % select type of test:
 isIndependent = strcmp(testType, 'independent');
 isPaired      = strcmp(testType, 'paired');
-
 % compute 'd' accordingly:
 if isIndependent
     
@@ -65,23 +62,7 @@ elseif isPaired
     
     deltas   = x1 - x2;         % differences
     sdDeltas = nanstd(deltas);  % standard deviation of the diffferences
-%    s        = sdDeltas;        % re-name
-    s = sqrt((nanstd(x1)^2+nanstd(x2)^2)/2) ;
+    s        = sdDeltas;        % re-name
     d        =  meanDiff / s;   % Cohen's d (paired version)
     
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%
